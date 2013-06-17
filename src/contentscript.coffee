@@ -1,15 +1,16 @@
+getBreakpoints = ->
+	breakpoints = []
+	elements = document.getElementById('chrome-breakpoints').children
+	breakpoints.push { name: x.name, value: x.value } for x in elements
+	breakpoints
+
 chrome.extension.onRequest.addListener (request, sender, sendResponse) ->
-	if request.method? 
-		console.log "Got message: #{request.method}"
-		
-		breakpoints = []
-		elements = document.getElementById('chrome-breakpoints').children
-		
-		breakpoints.push { name: x.name, value: x.value } for x in elements		
-		sendResponse { breakpoints: breakpoints }
+	if request.method is "popupLoaded"
+		sendResponse { breakpoints: getBreakpoints() }
 
 shouldShow = ->
-	true
+	elem = document.getElementById("chrome-breakpoints")
+	elem?
 
 # start it all up if we should be shown
 if shouldShow()

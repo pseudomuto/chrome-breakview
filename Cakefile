@@ -1,3 +1,4 @@
+fs = require "fs"
 {print} = require 'util'
 {spawn, exec} = require 'child_process'
 
@@ -7,6 +8,11 @@
 # red = '\033[0;31m'
 
 bold = green = reset = red = ""
+
+config = 
+	src_dir: "src"
+	dest_dir: "build"
+	static_files: [ "manifest.json", "popup.html", "popup.css" ]
 
 log = (message, color, explanation) -> 
 	console.log color + message + reset + ' ' + (explanation or '')
@@ -24,9 +30,17 @@ build = (watch, callback) ->
 		callback = watch
 		watch = false
 
-	options = ['-c', '-b', '-o', 'dist', 'src']
+	options = ['-c', '-o', config.dest_dir, config.src_dir]
 	options.unshift '-w' if watch
-	launch 'coffee', options, callback
+	launch 'coffee', options, ->
+		# move static files
+		for file in config.static_files
+			if fs.existsSync "#{config.dest_dir}/#{file}"
+				fs.unlinkSync "#{config.dest_dir}/#{file}"
+
+			fs.linkSync "#{config.src_dir}/#{file}", "#{config.dest_dir}/#{file}"
+
+		callback?()
 
 task 'build', 'compile source', -> 
 	build -> 

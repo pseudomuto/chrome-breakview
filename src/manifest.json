@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Chrome BreakView",
-	"description": "A breakpoint viewer extension for Chrome",
+	"description": "A breakpoint viewer extension for Google Chrome",
 	"version": "1.0",
 	"homepage_url": "https://github.com/davidmuto/chrome-breakview",
 	"offline_enabled": true,
@@ -21,6 +21,7 @@
 			"matches": [
 				"http://*/*",
 				"https://*/*",
+				"file://*/*",
 				"file:///*/*"
 			],
 			"js": [ "contentscript.js" ],

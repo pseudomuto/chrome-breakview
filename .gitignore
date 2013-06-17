@@ -1,0 +1,4 @@
+# ignore patterns
+
+# ignore the build folder
+build/
