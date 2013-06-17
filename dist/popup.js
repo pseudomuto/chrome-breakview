@@ -8,6 +8,16 @@ chrome.tabs.getSelected(null, function(tab) {
 
     console.log("Content Script returned to me");
     elem = document.getElementById("points");
+    elem.addEventListener("change", function(e) {
+      var newWidth;
+
+      newWidth = parseInt(this.value);
+      return chrome.windows.getCurrent(null, function(win) {
+        return chrome.windows.update(win.id, {
+          width: newWidth
+        }, function() {});
+      });
+    });
     _ref = response.breakpoints;
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

@@ -4,6 +4,10 @@ chrome.tabs.getSelected null, (tab) ->
 		console.log "Content Script returned to me"
 
 		elem = document.getElementById("points")
+		elem.addEventListener "change", (e) ->
+			newWidth = parseInt(@value)
+			chrome.windows.getCurrent null, (win) ->
+				chrome.windows.update win.id, { width: newWidth}, ->				
 
 		for item in response.breakpoints
 			li = document.createElement "option"
