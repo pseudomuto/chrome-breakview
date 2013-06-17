@@ -1,4 +1,4 @@
 # ignore patterns
-
-# ignore the build folder
+.DS_Store
 build/
+*.pem
