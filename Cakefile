@@ -24,10 +24,14 @@ build = (watch, callback) ->
 		callback = watch
 		watch = false
 
-	options = ['-c', '-o', 'dist', 'src']
+	options = ['-c', '-b', '-o', 'dist', 'src']
 	options.unshift '-w' if watch
 	launch 'coffee', options, callback
 
 task 'build', 'compile source', -> 
 	build -> 
+		log "Done", green
+
+task 'watch', 'compile source', -> 
+	build true, -> 
 		log "Done", green

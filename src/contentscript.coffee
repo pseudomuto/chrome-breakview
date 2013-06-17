@@ -1,6 +1,6 @@
-shouldRun = ->
-	# window.chrome_breakview is ""
-	true
+chrome.extension.onRequest.addListener (request, sender, sendResponse) ->
+	if request.method? 
+		console.log "Got message: #{request.method}"
+		sendResponse {}
 
-if shouldRun()
-	chrome.extension.sendRequest {}, (response) ->
+chrome.extension.sendRequest {}, (response) ->
