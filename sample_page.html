@@ -3,12 +3,11 @@
 	</head>
 	<body>
 		<h1>A sample page for testing Chrome BreakView</h1>
-		<script type="text/javascript">
-			var viewable_breakpoints = [
-				{ "name": "small", "width": 320 },
-				{ "name": "medium", "width": 640 },
-				{ "name": "large", "width": 960 }
-			];
-		</script>
+		
+		<div id="chrome-breakpoints">
+			<input type="hidden" name="small" value="320" />
+			<input type="hidden" name="medium" value="640" />
+			<input type="hidden" name="large" value="960" />
+		</div>
 	</body>
 </html>

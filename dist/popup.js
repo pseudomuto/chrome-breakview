@@ -4,7 +4,19 @@ chrome.tabs.getSelected(null, function(tab) {
     method: "popupLoaded",
     tabid: tab.id
   }, function(response) {
-    document.getElementById("title").innerHTML = "Aha!";
-    return console.log("Content Script returned to me");
+    var elem, item, li, _i, _len, _ref, _results;
+
+    console.log("Content Script returned to me");
+    elem = document.getElementById("points");
+    _ref = response.breakpoints;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      item = _ref[_i];
+      li = document.createElement("option");
+      li.setAttribute("value", item.value);
+      li.text = item.name;
+      _results.push(elem.appendChild(li));
+    }
+    return _results;
   });
 });
