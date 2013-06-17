@@ -5,15 +5,13 @@ chrome.tabs.getSelected null, (tab) ->
 		elem.addEventListener "change", (e) ->
 			return if @value is ""
 
-			if @value is "max"
-				chrome.windows.getCurrent null, (win) ->
-					chrome.windows.update win.id, { state: "maximized" }, ->
-						window.close()
-			else			
-				newWidth = parseInt(@value)
-				chrome.windows.getCurrent null, (win) ->
-					chrome.windows.update win.id, { width: newWidth }, ->	
-						window.close()
+			state = { state: "maximized" }
+			if @value isnt "max"
+				state = { width: parseInt @value }
+
+			chrome.windows.getCurrent null, (win) ->
+				chrome.windows.update win.id, state, ->
+					window.close()
 
 			true			
 
