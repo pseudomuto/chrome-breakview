@@ -1,20 +1,22 @@
 <html>
 	<head>
-		<script type="text/javascript">
-			var breakpoints = [
-				{ name: "small", value: 320 },
-				{ name: "medium", value: 640 },
-				{ name: "large", value: 1024 }
-			];
-		</script>
+		
 	</head>
 	<body>
 		<h1>A sample page for testing Chrome BreakView</h1>
+
+		<p id="width-spec"></p>
 		
 		<div id="chrome-breakpoints">
 			<input type="hidden" name="small" value="320" />
 			<input type="hidden" name="medium" value="640" />
 			<input type="hidden" name="large" value="960" />
 		</div>
+
+		<script type="text/javascript">
+			window.onload = function() {
+				document.getElementById("width-spec").innerHTML = "Width: " + window.outerWidth;
+			}
+		</script>
 	</body>
 </html>

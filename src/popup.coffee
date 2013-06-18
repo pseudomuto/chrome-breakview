@@ -12,6 +12,7 @@ chrome.tabs.getSelected null, (tab) ->
 			chrome.windows.getCurrent null, (win) ->
 				chrome.windows.update win.id, state, ->
 					window.close()
+					chrome.tabs.sendRequest tab.id, { method: "reload", tabid: tab.id }, (response) ->
 
 			true			
 

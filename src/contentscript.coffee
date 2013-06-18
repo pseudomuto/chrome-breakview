@@ -7,6 +7,9 @@ getBreakpoints = ->
 chrome.extension.onRequest.addListener (request, sender, sendResponse) ->
 	if request.method is "popupLoaded"
 		sendResponse { breakpoints: getBreakpoints() }
+	else if request.method is "reload"
+		sendResponse {}
+		document.location.reload()
 
 shouldShow = ->
 	elem = document.getElementById("chrome-breakpoints")
